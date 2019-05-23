@@ -1,0 +1,6 @@
+framework module SAPlugAVPlayer {
+  umbrella header "SAPlugAVPlayer-umbrella.h"
+
+  export *
+  module * { export * }
+}
