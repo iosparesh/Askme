@@ -1,4 +1,4 @@
-# SA-Plug-AVPlayer
+# SAPlugAVPlayer
 
 Simple and featured video player with full of customisation possibility, full control over AVPlayer. Adjust as you need in terms of design and feature.
 ## Getting Started
@@ -22,6 +22,14 @@ Here we have a simple plug and play module that a developer can use to integrate
 Reference:
 The slider is taken from BufferSlider Github project.
 
+### Preview (Mine)
+##Note : Make your own design. this is just a view to view
+
+![alt text](https://github.com/teamSolutionAnalysts/sa-plug-avplayer/blob/master/SAVideoPlayer/Simulator%20Screen%20Shot%20-%20iPhone%206%20-%202019-05-23%20at%2017.37.56.png)
+
+
+![alt text](https://github.com/teamSolutionAnalysts/sa-plug-avplayer/blob/master/SAVideoPlayer/Simulator%20Screen%20Shot%20-%20iPhone%206%20-%202019-05-23%20at%2017.37.59.png)
+
 ### Prerequisites
 
 Swift 4.2
@@ -31,12 +39,20 @@ iOS 10*
 Xcode 10.2
 ### Installing
 
+You want to add pod 'SAPlugAVPlayer', '~> 0.1.5' similar to the following to your Podfile
+```swift
+target 'MyApp' do
+  pod 'SAPlugAVPlayer', '~> 0.1.5'
+end
+```
+Then run a pod install inside your terminal, or from CocoaPods.app.
+
 Manually
 If you prefer not to use any of the aforementioned dependency managers, you can integrate SA-Plug-AVPlayer into your project manually. Just copy the source file in your project directory
 
 ### Sample
 ```swift
-	import PlusAVPlayer
+	import SAPlugAVPlayer
 
  	@IBOutlet weak var viewController: UIView!
     	@IBOutlet weak var viewVideo: ViewVideo!

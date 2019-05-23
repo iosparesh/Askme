@@ -9,7 +9,7 @@ import AVFoundation
 import UIKit
 import WebKit
 
-protocol PlayerEventDelegate : class{
+public protocol PlayerEventDelegate : class{
     func didUpdateTimer(_ player : AVPlayer, elpsed time : String)
     func totalTime(_ player : AVPlayer)
     func AVPlayer(didPause player : AVPlayer)
@@ -20,40 +20,40 @@ protocol PlayerEventDelegate : class{
     func AVPlayer(didTaptoPreviousvideo : AVPlayer?)
     func AVPlayer(didEndPlaying : AVPlayer?)
 }
-extension PlayerEventDelegate {
+public extension PlayerEventDelegate {
     func didUpdateTimer(_ player : AVPlayer, elpsed time : String){}
     func AVPlayer(didPause player : AVPlayer){}
     func AVPlayer(didPlay player : AVPlayer){}
 }
 
-class ViewVideo : UIView
+public class ViewVideo : UIView
 {
-    var playerLayer: AVPlayerLayer?
-    var player: AVPlayer?
-    var isLoop: Bool = false
-    var saveVideoLocally: Bool = false
-    var isToolHidden :Bool = true
+    public var playerLayer: AVPlayerLayer?
+    public var player: AVPlayer?
+    public var isLoop: Bool = false
+    public var saveVideoLocally: Bool = false
+    public var isToolHidden :Bool = true
     private var timer : Timer?
-    var slider : BufferSlider?
-    var activityIndicator : UIActivityIndicatorView?
-    var totalTime : Double = 0
-    var lblStartTime : VideoControllLabel?
-    var lblTotalTime : VideoControllLabel?
-    var currentVideoID = 0
-    var isMiniMized : Bool = false
+    public var slider : BufferSlider?
+    public var activityIndicator : UIActivityIndicatorView?
+    public var totalTime : Double = 0
+    public var lblStartTime : VideoControllLabel?
+    public var lblTotalTime : VideoControllLabel?
+    public var currentVideoID = 0
+    public var isMiniMized : Bool = false
     open weak var delegate : PlayerEventDelegate?
-    var btnBackward : VideoControllButton?
-    var btnForward : VideoControllButton?
-    var btnPlayPause : VideoControllButton?
-    var btnFullScreen : VideoControllButton?
-    var webview: WKWebView?
-    var OverlayWindow: UIView?
-    var isEmbeddedVideo = false
-    var url : URL?
-    var timeObserver :Any?
-    fileprivate let seekDuration: Float64 = 5
-    var isFullscreen :Bool = false
-    weak var controllerView:UIView?
+    public var btnBackward : VideoControllButton?
+    public var btnForward : VideoControllButton?
+    public var btnPlayPause : VideoControllButton?
+    public var btnFullScreen : VideoControllButton?
+    public var webview: WKWebView?
+    public var OverlayWindow: UIView?
+    open var isEmbeddedVideo = false
+    public var url : URL?
+    public var timeObserver :Any?
+    public let seekDuration: Float64 = 5
+    public var isFullscreen :Bool = false
+    public weak var controllerView:UIView?
     {
         didSet{
             if self.isEmbeddedVideo{
@@ -64,14 +64,14 @@ class ViewVideo : UIView
                 if let btn = vw as? VideoControllButton, btn.controllType == .backward
                 {
                     self.btnBackward = btn
-                   // self.btnBackward?.addTarget(self, action: #selector(doBackwardJump), for: .touchDownRepeat)
+                    // self.btnBackward?.addTarget(self, action: #selector(doBackwardJump), for: .touchDownRepeat)
                     self.btnBackward?.addTarget(self, action: #selector(doBackwardJump), for: .touchUpInside)
                     
                 }
                 else if let btn = vw as? VideoControllButton, btn.controllType == .forward
                 {
                     self.btnForward = btn
-                   // self.btnForward?.addTarget(self, action: #selector(doForwardJump), for: .touchDownRepeat)
+                    // self.btnForward?.addTarget(self, action: #selector(doForwardJump), for: .touchDownRepeat)
                     self.btnForward?.addTarget(self, action: #selector(doForwardJump), for: .touchUpInside)
                 }
                 else if let playbtn = vw as? VideoControllButton, playbtn.controllType == .PlayPause
@@ -104,7 +104,7 @@ class ViewVideo : UIView
         }
     }
     
-    var currentItem : AVPlayerItem?{
+    public var currentItem : AVPlayerItem?{
         if let item = self.player?.currentItem
         {
             return item
@@ -112,7 +112,7 @@ class ViewVideo : UIView
         return nil
     }
     
-    lazy var asset: AVURLAsset = {
+    public lazy var asset: AVURLAsset = {
         
         var asset: AVURLAsset = AVURLAsset(url: self.url!)
         
@@ -126,14 +126,17 @@ class ViewVideo : UIView
     }
     
     
-    func configure(url: String = "", ControllView:UIView?, loader : UIActivityIndicatorView?, localPath  :String = "", fileextension : String = "") {
+    public func configure(url: String = "", ControllView:UIView?, loader : UIActivityIndicatorView?, localPath  :String = "", fileextension : String = "") {
         if let loaderview = loader{
             self.activityIndicator = loaderview
             self.activityIndicator?.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.3)
+            self.activityIndicator?.hidesWhenStopped = true
+            
         }
         if let viewc = ControllView
         {
             self.controllerView = viewc
+            self.controllerView?.backgroundColor = UIColor.clear
         }
         if ViewVideo.checkIfUrlIsEmbedded(url: url)
         {
@@ -189,7 +192,7 @@ class ViewVideo : UIView
         }
     }
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if object is AVPlayerItem {
             switch keyPath {
                 
@@ -233,7 +236,7 @@ class ViewVideo : UIView
         }
     }
     
-
+    
     private func disableScrollView(_ view: UIView) {
         (view as? UIScrollView)?.isScrollEnabled = false
         view.subviews.forEach { disableScrollView($0) }
@@ -257,13 +260,13 @@ class ViewVideo : UIView
             
             exporter?.exportAsynchronously(completionHandler: {
                 
-               // print(exporter?.status.rawValue)
-              //  print(exporter?.error)
+                // print(exporter?.status.rawValue)
+                //  print(exporter?.error)
             })
         }
     }
     
-    class func checkIfUrlIsEmbedded(url:String) ->Bool
+    public class func checkIfUrlIsEmbedded(url:String) ->Bool
     {
         let key = "embed"
         var isEmbed = false
@@ -283,7 +286,7 @@ class ViewVideo : UIView
         return isEmbed
     }
     
-    func availableDuration() -> CMTime
+    public func availableDuration() -> CMTime
     {
         if let range = self.player?.currentItem?.loadedTimeRanges.first {
             return CMTimeRangeGetEnd(range.timeRangeValue)
@@ -503,13 +506,13 @@ class ViewVideo : UIView
         }
     }
     
-    func play() {
+    public func play() {
         if self.isEmbeddedVideo{
             return
         }
         if player?.timeControlStatus != AVPlayer.TimeControlStatus.playing {
             player?.play()
-//            self.delegate?.totalTime(self.player!)
+            //            self.delegate?.totalTime(self.player!)
             let currentItem = player?.currentItem
             let duration = currentItem?.asset.duration
             self.slider?.maximumValue = 1
@@ -547,7 +550,7 @@ class ViewVideo : UIView
         self.controllerView?.isHidden = true
     }
     
-    func replaceVideo(videourl:String)
+    public func replaceVideo(videourl:String)
     {
         if let fileurl = URL(string: videourl)
         {
@@ -569,13 +572,13 @@ class ViewVideo : UIView
         }
     }
     
-    func replacelocalVideo(path:String,videoextension : String)
+    public func replacelocalVideo(path:String,videoextension : String)
     {
         
         self.configurePlayer(localvideoname: path, videoextension: videoextension)
     }
     
-    @objc func changePlayerRate(rate : Float) {
+    public func changePlayerRate(rate : Float) {
         if self.isEmbeddedVideo{
             return
         }
@@ -599,7 +602,7 @@ class ViewVideo : UIView
         player.play()
         
     }
-
+    
     @objc func doForwardJump(_ sender: UIButton, event: UIEvent) {
         if self.isEmbeddedVideo{
             return
@@ -607,7 +610,7 @@ class ViewVideo : UIView
         self.delegate?.AVPlayer(didTaptoNextvideo: self.player)
     }
     
-    func fastForwardPlayer()
+    public func fastForwardPlayer()
     {
         guard let duration  = player?.currentItem?.duration else{
             return
@@ -622,7 +625,7 @@ class ViewVideo : UIView
         }
     }
     
-    func fastBackward()
+    public func fastBackward()
     {
         let playerCurrentTime = CMTimeGetSeconds((player?.currentTime())!)
         var newTime = playerCurrentTime - seekDuration
@@ -640,20 +643,20 @@ class ViewVideo : UIView
         }
         self.delegate?.AVPlayer(didTaptoPreviousvideo: self.player)
     }
-
-    func setHoursMinutesSecondsFrom(seconds: Double){
+    
+    public func setHoursMinutesSecondsFrom(seconds: Double){
         let secs = Int(seconds)
         self.lblTotalTime?.text = NSString(format: "%02d:%02d", secs/60, secs%60) as String
     }
     
-    var isPlaying : Bool{
+    public var isPlaying : Bool{
         if self.isEmbeddedVideo{
             return false
         }
         return player?.timeControlStatus == AVPlayer.TimeControlStatus.playing
     }
     
-    func pause() {
+    public func pause() {
         if self.isEmbeddedVideo{
             return
         }
@@ -665,7 +668,7 @@ class ViewVideo : UIView
         self.isToolHidden = false
     }
     
-    func stop() {
+    public func stop() {
         if self.isEmbeddedVideo{
             return
         }
@@ -695,7 +698,7 @@ class ViewVideo : UIView
         }
     }
     
-    func setupSubtitle(localpath : String, fileextension : String)
+    public func setupSubtitle(localpath : String, fileextension : String)
     {
         let url = Bundle.main.url(forResource: localpath, withExtension: fileextension)
         let localVideoAsset = AVAsset(url: url!)
@@ -715,13 +718,13 @@ class ViewVideo : UIView
         let subtitleTrack = videoPlusSubtitles.addMutableTrack(withMediaType: .text, preferredTrackID: kCMPersistentTrackID_Invalid)
         
         try? subtitleTrack?.insertTimeRange(CMTimeRangeMake(start: CMTime.zero, duration: localVideoAsset.duration),
-                                                of: subtitleAsset.tracks(withMediaType: .text)[0],
-                                                at: CMTime.zero)
+                                            of: subtitleAsset.tracks(withMediaType: .text)[0],
+                                            at: CMTime.zero)
     }
     
     deinit {
         print("Player did deinitialized")
-//        self.player?.removeTimeObserver(self)
+        //        self.player?.removeTimeObserver(self)
         if let token = timeObserver {
             player?.removeTimeObserver(token)
             timeObserver = nil
@@ -745,3 +748,4 @@ extension ViewVideo : WKNavigationDelegate, AVAssetResourceLoaderDelegate
     
     
 }
+

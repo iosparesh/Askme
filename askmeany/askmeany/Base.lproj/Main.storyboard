@@ -17,9 +17,43 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGA-to-rzD" customClass="ViewVideo" customModule="SAPlugAVPlayer">
+                                <rect key="frame" x="0.0" y="44" width="414" height="233"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="WGA-to-rzD" secondAttribute="height" multiplier="16:9" id="Kvb-hw-pYZ"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NOp-GD-PXI">
+                                <rect key="frame" x="0.0" y="44" width="414" height="233"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="CMp-l2-aOU">
+                                <rect key="frame" x="0.0" y="44" width="414" height="233"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="WGA-to-rzD" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="32F-qL-QVi"/>
+                            <constraint firstItem="WGA-to-rzD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6KO-rP-uOP"/>
+                            <constraint firstItem="CMp-l2-aOU" firstAttribute="trailing" secondItem="NOp-GD-PXI" secondAttribute="trailing" id="961-El-WtU"/>
+                            <constraint firstItem="CMp-l2-aOU" firstAttribute="leading" secondItem="NOp-GD-PXI" secondAttribute="leading" id="D7k-8G-YPs"/>
+                            <constraint firstItem="NOp-GD-PXI" firstAttribute="leading" secondItem="WGA-to-rzD" secondAttribute="leading" id="It7-hl-Rrg"/>
+                            <constraint firstItem="CMp-l2-aOU" firstAttribute="top" secondItem="NOp-GD-PXI" secondAttribute="top" id="RS1-0u-ocM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WGA-to-rzD" secondAttribute="trailing" id="Tk9-GR-aGm"/>
+                            <constraint firstItem="NOp-GD-PXI" firstAttribute="top" secondItem="WGA-to-rzD" secondAttribute="top" id="TwN-Wg-gRh"/>
+                            <constraint firstItem="NOp-GD-PXI" firstAttribute="bottom" secondItem="WGA-to-rzD" secondAttribute="bottom" id="gcc-99-OG6"/>
+                            <constraint firstItem="CMp-l2-aOU" firstAttribute="bottom" secondItem="NOp-GD-PXI" secondAttribute="bottom" id="j7z-gn-maD"/>
+                            <constraint firstItem="NOp-GD-PXI" firstAttribute="trailing" secondItem="WGA-to-rzD" secondAttribute="trailing" id="spF-ve-TJZ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="CMp-l2-aOU" id="TPd-LS-dT3"/>
+                        <outlet property="vwController" destination="NOp-GD-PXI" id="WiZ-dR-6fD"/>
+                        <outlet property="vwVideo" destination="WGA-to-rzD" id="4BM-pM-zQz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
