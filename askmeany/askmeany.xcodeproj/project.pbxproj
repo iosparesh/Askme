@@ -97,10 +97,10 @@
 		AF3270B22296735300C46927 /* askmeany */ = {
 			isa = PBXGroup;
 			children = (
+				B099C06122967D310016237C /* Resources */,
+				B099C06022967CE20016237C /* Controller */,
 				AF3270B32296735300C46927 /* AppDelegate.swift */,
-				AF3270B52296735300C46927 /* ViewController.swift */,
 				AF3270B72296735300C46927 /* Main.storyboard */,
-				AF3270BA2296735500C46927 /* Assets.xcassets */,
 				AF3270BC2296735500C46927 /* LaunchScreen.storyboard */,
 				AF3270BF2296735500C46927 /* Info.plist */,
 			);
@@ -123,6 +123,22 @@
 				AF3270D52296735500C46927 /* Info.plist */,
 			);
 			path = askmeanyUITests;
+			sourceTree = "<group>";
+		};
+		B099C06022967CE20016237C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AF3270B52296735300C46927 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B099C06122967D310016237C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AF3270BA2296735500C46927 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
