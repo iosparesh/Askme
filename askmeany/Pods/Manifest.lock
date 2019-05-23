@@ -1,0 +1,16 @@
+PODS:
+  - SAPlugAVPlayer (0.1.1)
+
+DEPENDENCIES:
+  - SAPlugAVPlayer
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SAPlugAVPlayer
+
+SPEC CHECKSUMS:
+  SAPlugAVPlayer: 50c24f2684b5c1c4386e0642423594c38b836250
+
+PODFILE CHECKSUM: 57fa51bb31fe407711cf0904119236a08c2e6c9f
+
+COCOAPODS: 1.6.1
